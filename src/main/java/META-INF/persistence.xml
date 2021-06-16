@@ -5,5 +5,20 @@
 		<class>com.gabrielferreira.entidade.Pais</class>
 		<class>com.gabrielferreira.entidade.Tipo</class>
 		<class>com.gabrielferreira.entidade.Veiculo</class>
+		
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/cadastro_veiculo?useTimezone=true&amp;serverTimezone=America/Sao_Paulo" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="gabriel" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+
+			<property name="javax.persistence.schema-generation.database.action" value="update" />
+      		<property name="javax.persistence.schema-generation.create-source" value="metadata" />
+      		
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+		
+		
 	</persistence-unit>
 </persistence>
