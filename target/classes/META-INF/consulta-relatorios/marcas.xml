@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+  version="2.1">
+  
+  <named-native-query name="Marcas.findAll">
+    <query>
+      	<![CDATA[
+      		select m.id, m.nome, m.data_fundacao, m.sede,p.sigla, p.nome as paises from tab_marca m join tab_pais p on p.id = m.pais_id
+			where m.nome like :nome and  m.sede like :sede and  p.nome like :pais
+      	]]>
+    </query>
+  </named-native-query>
+
+
+</entity-mappings>

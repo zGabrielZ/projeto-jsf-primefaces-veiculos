@@ -11,6 +11,7 @@ import javax.inject.Named;
 import com.gabrielferreira.entidade.search.MarcaSearch;
 import com.gabrielferreira.entidade.search.TipoCarroSearch;
 import com.gabrielferreira.entidade.search.VeiculoSearch;
+import com.gabrielferreira.service.MarcaService;
 import com.gabrielferreira.service.VeiculoService;
 import com.gabrielferreira.util.FacesMessages;
 
@@ -31,6 +32,9 @@ public class GerarRelatorioController implements Serializable{
 	@Inject
 	private VeiculoService veiculoService;
 	
+	@Inject
+	private MarcaService marcaService;
+	
 	private TipoCarroSearch tipoCarroSearch;
 	
 	private MarcaSearch marcaSearch;
@@ -49,7 +53,10 @@ public class GerarRelatorioController implements Serializable{
 	}
 	
 	public void gerarRelatorioMarca() {
-		System.out.println("Gerar relatorio marca");
+		marcaService.getGerarRelatorioMarca(marcaSearch.getNome(),marcaSearch.getSede(), marcaSearch.getPais());
+		FacesMessages.adicionarMensagem("frmConsulta:msg", FacesMessage.SEVERITY_INFO, "Relatório de marcas gerado com sucesso !",
+				null);
+		marcaSearch = new MarcaSearch();
 	}
 	
 	public void gerarRelatorioVeiculos() {
