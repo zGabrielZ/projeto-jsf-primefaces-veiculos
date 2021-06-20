@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+  version="2.1">
+  
+  <named-native-query name="Veiculos.findAll">
+    <query>
+      	<![CDATA[
+      		select v.id,v.modelo,m.nome as marca,v.preco,v.data_lancamento,t.tipo_carro,v.cor from tab_veiculo v 
+			join tab_tipo t on t.id = v.tipo_id join tab_marca m on m.id = v.marca_id
+			where v.modelo like :modelo and v.cor like :cor and t.tipo_carro like :tipo and m.nome like :marca
+      	]]>
+    </query>
+  </named-native-query>
+
+
+</entity-mappings>

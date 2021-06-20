@@ -1,0 +1,65 @@
+package com.gabrielferreira.repositorio;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import com.gabrielferreira.entidade.Marca;
+import com.gabrielferreira.entidade.Tipo;
+import com.gabrielferreira.entidade.Veiculo;
+import com.gabrielferreira.util.EntityManagerUtil;
+
+public class VeiculoRepositorio implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private EntityManager entityManager = EntityManagerUtil.getEntityManager();
+	
+	@SuppressWarnings("unchecked")
+	public List<Veiculo> getVeiculos(String modelo, String cor, String tipoCarro, String marca){
+		Query query = entityManager.createNamedQuery("Veiculos.findAll");
+		query.setParameter("modelo", "%"+modelo+"%");
+		query.setParameter("cor", "%"+cor+"%");
+		query.setParameter("tipo", "%"+tipoCarro+"%");
+		query.setParameter("marca", "%"+marca+"%");
+		
+		List<Object[]> objs = query.getResultList();
+		List<Veiculo> veiculos = new ArrayList<Veiculo>();
+		
+		for (Object[] o : objs) {
+			 Object[] aux = o;
+			 
+			 Veiculo veiculo = new Veiculo();
+			 Marca marcaVeiculos = new Marca();
+			 Tipo tipoVeiculos = new Tipo();
+			 
+			 
+			 
+			 veiculo.setId((Integer) aux[0]);
+			 veiculo.setModelo((String)aux[1]);
+			 
+			 marcaVeiculos.setNome((String)aux[2]);
+			 veiculo.setMarca(marcaVeiculos);
+			 
+			 veiculo.setPreco((BigDecimal) aux[3]);
+			 veiculo.setDataLancamento((Date) aux[4]);
+			 
+			 tipoVeiculos.setTipoCarro((String) aux[5]);
+			 veiculo.setTipo(tipoVeiculos);
+			 
+			 veiculo.setCor((String) aux[6]);
+		     veiculos.add(veiculo);
+		}
+	
+		return veiculos;
+	}
+
+}

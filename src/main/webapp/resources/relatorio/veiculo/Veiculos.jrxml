@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioVeiculo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bdda84fc-bb40-4f34-ab03-a93386d7ebe9">
+	<parameter name="criadorParam" class="java.lang.String"/>
+	<parameter name="modeloParam" class="java.lang.String"/>
+	<parameter name="corParam" class="java.lang.String"/>
+	<parameter name="tipoParam" class="java.lang.String"/>
+	<parameter name="marcaParam" class="java.lang.String"/>
+	<queryString language="SQL">
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+	</field>
+	<field name="modelo" class="java.lang.String">
+	</field>
+	<field name="dataLancamento" class="java.util.Date">
+	</field>
+	<field name="preco" class="java.math.BigDecimal">
+	</field>
+	<field name="cor" class="java.lang.String">
+	</field>
+	<field name="tipo.tipoCarro" class="java.lang.String">
+	</field>
+	<field name="marca.nome" class="java.lang.String">
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="210" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="210" uuid="8954c05f-955c-4080-80c5-c5377c04d2b2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="80" y="30" width="400" height="30" uuid="fe93dab6-ad7e-42ed-80d6-5a6ef89d12e7"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Relatório de veículos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="70" width="90" height="30" uuid="34db0418-4b87-4c28-9a43-6462663b8d5e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Modelo :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="100" width="90" height="30" uuid="87ee4ec0-fba4-41b0-aebe-c40731ad5f60"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Cor :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="130" width="90" height="30" uuid="1b56e037-6f31-426f-ae1a-910820f153f8"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tipo de carro :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="160" width="90" height="30" uuid="40830362-42e7-474f-bc49-12a7bcfea05e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Marca :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="70" width="310" height="30" uuid="78fd7fe0-cec9-4b18-9072-571dd4db1d5f"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{modeloParam}.equals("") ? "Modelo não informado" : $P{modeloParam}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="100" width="310" height="30" uuid="df7c218d-8e77-4f9e-af5e-6429ac746a4f"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{corParam}.equals("") ? "Cor não informado" : $P{corParam}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="130" width="310" height="30" uuid="ce89189b-cb3c-4dd4-939c-4bb173d46910"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tipoParam}.equals("") ? "Tipo de carro não informado" : $P{tipoParam}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="160" width="310" height="30" uuid="31c5427a-8054-44ee-b372-c69d5dc78d3c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{marcaParam}.equals("") ? "Marca não informada" : $P{marcaParam}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="141" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="120" uuid="b8a6b934-6ea5-45a0-a9af-9a03db7fd96f"/>
+			</rectangle>
+			<textField>
+				<reportElement x="100" y="0" width="90" height="30" uuid="59cad796-ea33-4d26-a712-e288472aa8f7"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="c731ee11-71a7-4804-bf47-787383572d55"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Código :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="290" y="0" width="265" height="30" uuid="ce1f3b32-088f-46fb-89de-12be5287807b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["   "+$F{modelo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="190" y="0" width="100" height="30" uuid="a634f478-93f2-4d96-a438-3e5567c1eed2"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Modelo :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="30" uuid="5a3be234-2c41-490e-9b49-7c9e2bcb583a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Marca :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="30" width="190" height="30" uuid="ef64e043-0d63-4780-b783-6972b4ebb77c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["   "+$F{marca.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="60" width="165" height="30" uuid="7089c777-32df-49e3-86c8-970498df497e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["   "+$F{tipo.tipoCarro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="60" width="100" height="30" uuid="a074b1fd-78ad-4f54-8128-d23aa33f6148"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Tipo veículo :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="30" width="100" height="30" uuid="c479f0f2-521e-4b22-9f36-a64b75127397"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Preço :]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.##;¤-#,##0.##">
+				<reportElement x="390" y="30" width="165" height="30" uuid="62ad95d4-273b-4eee-9b60-13c3a821e227"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{preco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="90" width="190" height="30" uuid="7142f119-b505-4380-992b-1b0c0bd2c8cd"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["   "+$F{cor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="90" width="100" height="30" uuid="3f73e71e-2250-422a-84be-541eed540ab2"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Cor :]]></text>
+			</staticText>
+			<textField pattern="d &apos;de&apos; MMMM &apos;de&apos; YYYY">
+				<reportElement x="100" y="60" width="190" height="30" uuid="37dd45ea-ade8-4cb2-8269-b1e7c0747ebd"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["   "+$F{dataLancamento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="30" uuid="53379398-ebb5-4d21-929b-e70967d0d901"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Lançamento :]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="52">
+			<textField>
+				<reportElement x="490" y="32" width="70" height="20" uuid="37e2bd0a-aeb6-4bda-a5b7-549777380a77"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement x="260" y="34" width="145" height="16" uuid="5cc7cea4-f120-4d82-9dee-72a95881cc40"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Criado por : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="405" y="34" width="170" height="16" uuid="07f7b795-4193-493f-aa3f-307a4b062446"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{criadorParam}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
