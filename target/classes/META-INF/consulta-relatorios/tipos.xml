@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+  version="2.1">
+  
+  <named-native-query name="Tipos.findAll">
+    <query>
+      	<![CDATA[
+      		select t.* from tab_tipo t where t.tipo_carro like :tipoCarro
+      	]]>
+    </query>
+  </named-native-query>
+  
+  <named-native-query name="Tipos.findById">
+    <query>
+      	<![CDATA[
+      		select v.id,v.modelo,v.data_lancamento,v.preco,v.cor,m.nome from tab_veiculo v join tab_tipo t on t.id = v.tipo_id 
+			join tab_marca m on m.id = v.marca_id where t.id = :idTipo
+      	]]>
+    </query>
+  </named-native-query>
+
+
+</entity-mappings>

@@ -3,6 +3,7 @@
 	<persistence-unit name="Projeto-Veiculos">
 		<mapping-file>META-INF/consulta-relatorios/veiculos.xml</mapping-file>
 		<mapping-file>META-INF/consulta-relatorios/marcas.xml</mapping-file>
+		<mapping-file>META-INF/consulta-relatorios/tipos.xml</mapping-file>
 		<class>com.gabrielferreira.entidade.Marca</class>
 		<class>com.gabrielferreira.entidade.Pais</class>
 		<class>com.gabrielferreira.entidade.Tipo</class>

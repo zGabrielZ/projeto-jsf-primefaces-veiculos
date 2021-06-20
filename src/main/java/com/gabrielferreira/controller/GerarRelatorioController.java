@@ -12,6 +12,7 @@ import com.gabrielferreira.entidade.search.MarcaSearch;
 import com.gabrielferreira.entidade.search.TipoCarroSearch;
 import com.gabrielferreira.entidade.search.VeiculoSearch;
 import com.gabrielferreira.service.MarcaService;
+import com.gabrielferreira.service.TipoService;
 import com.gabrielferreira.service.VeiculoService;
 import com.gabrielferreira.util.FacesMessages;
 
@@ -28,6 +29,9 @@ public class GerarRelatorioController implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private TipoService tipoService;
 	
 	@Inject
 	private VeiculoService veiculoService;
@@ -49,7 +53,10 @@ public class GerarRelatorioController implements Serializable{
 	}
 	
 	public void gerarRelatorioTipoCarro() {
-		System.out.println("Gerar relatorio tipo de carro");
+		tipoService.getGerarRelatorioTipo(tipoCarroSearch.getTipoCarro());
+		FacesMessages.adicionarMensagem("frmConsulta:msg", FacesMessage.SEVERITY_INFO, "Relatório de tipos gerado com sucesso !",
+				null);
+		tipoCarroSearch = new TipoCarroSearch();
 	}
 	
 	public void gerarRelatorioMarca() {
