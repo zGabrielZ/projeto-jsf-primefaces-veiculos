@@ -15,6 +15,8 @@ import com.gabrielferreira.entidade.Tipo;
 import com.gabrielferreira.entidade.Veiculo;
 import com.gabrielferreira.repositorio.TipoRepositorio;
 import com.gabrielferreira.util.FacesMessages;
+
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -61,8 +63,15 @@ public class TipoService implements Serializable{
 			String caminhoVeiculosJasper = facesContext.getExternalContext().getRealPath("/resources/subrelatorio/Veiculos.jasper");
 			paramatros.put("SUBREPORT_DIR", caminhoVeiculosJasper);
 			
-			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(tipos);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(compilarRelatorioTipo,paramatros,dataSource);
+			JasperPrint jasperPrint = null;
+			if(tipos.isEmpty()) {
+				String caminhoNaoEncontrado = facesContext.getExternalContext().getRealPath("/resources/nao-encontrado/NaoEncontrado.jrxml");
+				JasperReport compilarNaoEncontrado = JasperCompileManager.compileReport(caminhoNaoEncontrado);
+				jasperPrint = JasperFillManager.fillReport(compilarNaoEncontrado,null,new JREmptyDataSource());
+			} else {
+				JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(tipos);
+				jasperPrint = JasperFillManager.fillReport(compilarRelatorioTipo,paramatros,dataSource);
+			}
 			
 			HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 			response.setContentType("application/pdf");

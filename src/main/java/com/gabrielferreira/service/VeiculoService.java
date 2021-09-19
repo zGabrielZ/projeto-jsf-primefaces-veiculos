@@ -1,5 +1,4 @@
 package com.gabrielferreira.service;
-
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,6 +14,7 @@ import com.gabrielferreira.repositorio.TipoRepositorio;
 import com.gabrielferreira.repositorio.VeiculoRepositorio;
 import com.gabrielferreira.util.FacesMessages;
 
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -60,8 +60,15 @@ public class VeiculoService implements Serializable{
 			paramatros.put("corParam", cor);
 			paramatros.put("marcaParam", marca);
 			
-			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(veiculos);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(compilarRelatorioVeiculo,paramatros,dataSource);
+			JasperPrint jasperPrint = null;
+			if(veiculos.isEmpty()) {
+				String caminhoNaoEncontrado = facesContext.getExternalContext().getRealPath("/resources/nao-encontrado/NaoEncontrado.jrxml");
+				JasperReport compilarNaoEncontrado = JasperCompileManager.compileReport(caminhoNaoEncontrado);
+				jasperPrint = JasperFillManager.fillReport(compilarNaoEncontrado,null,new JREmptyDataSource());
+			} else {
+				JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(veiculos);
+				jasperPrint = JasperFillManager.fillReport(compilarRelatorioVeiculo,paramatros,dataSource);
+			}
 			
 			HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 			response.setContentType("application/pdf");
