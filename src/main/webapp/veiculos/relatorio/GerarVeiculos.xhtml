@@ -35,10 +35,16 @@
 				<p:inputText style="margin-left:10px;" id="marca"
 					value="#{gerarRelatorioController.veiculoSearch.marca}"></p:inputText>
 
-				<p:commandLink style="position:relative;text-decoration:none;top:8px;"
+				<div align="center">
+					<p:commandLink style="position:relative;text-decoration:none;top:8px;"
 					id="gerar" value="Gerar Relatório" ajax="false"
 					action="#{gerarRelatorioController.gerarRelatorioVeiculos}"
 					process="@form" update="@form" target="_blank" />
+					
+					<input type="button" value="Limpar formulário" id="limpar"
+					 style="position:relative;text-decoration:none;top:8px;
+					margin-left: 10px;"  onclick="return document.getElementById('frmConsulta').reset();"  />
+				</div>
 			
 			</h:form>
 		</p:panelGrid>
