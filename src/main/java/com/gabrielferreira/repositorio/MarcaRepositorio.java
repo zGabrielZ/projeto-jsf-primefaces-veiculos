@@ -1,29 +1,24 @@
 package com.gabrielferreira.repositorio;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.gabrielferreira.entidade.Marca;
 import com.gabrielferreira.entidade.Pais;
-import com.gabrielferreira.util.EntityManagerUtil;
+import com.gabrielferreira.repositorio.generico.RepositorioGenerico;
 
-public class MarcaRepositorio implements Serializable{
+public class MarcaRepositorio extends RepositorioGenerico<Marca>{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private EntityManager entityManager = EntityManagerUtil.getEntityManager();
-	
 	@SuppressWarnings("unchecked")
 	public List<Marca> getMarcas(String nome, String sede, String pais){
-		Query query = entityManager.createNamedQuery("Marcas.findAll");
+		Query query = getEntityManager().createNamedQuery("Marcas.findAll");
 		query.setParameter("nome", "%"+nome+"%");
 		query.setParameter("sede", "%"+sede+"%");
 		query.setParameter("pais", "%"+pais+"%");

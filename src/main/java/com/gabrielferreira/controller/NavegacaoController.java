@@ -30,6 +30,26 @@ public class NavegacaoController implements Serializable{
 	    }
 	}
 	
+	public void cadastroTipoCarro() {
+	    ExternalContext externalContext = getExternalContext();
+	    try {
+	          externalContext.redirect(externalContext.getRequestContextPath()
+	                + "/tipo-carro/CadastroTipoCarro.xhtml");
+	    } catch (IOException e) {
+	          e.printStackTrace();
+	    }
+	}
+	
+	public void consultaTipoCarro() {
+	    ExternalContext externalContext = getExternalContext();
+	    try {
+	          externalContext.redirect(externalContext.getRequestContextPath()
+	                + "/tipo-carro/ConsultaTipoCarro.xhtml");
+	    } catch (IOException e) {
+	          e.printStackTrace();
+	    }
+	}
+	
 	public void tipoCarro() {
 	    ExternalContext externalContext = getExternalContext();
 	    try {

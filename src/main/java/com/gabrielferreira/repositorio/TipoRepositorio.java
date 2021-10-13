@@ -1,31 +1,25 @@
 package com.gabrielferreira.repositorio;
-
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.gabrielferreira.entidade.Marca;
 import com.gabrielferreira.entidade.Tipo;
 import com.gabrielferreira.entidade.Veiculo;
-import com.gabrielferreira.util.EntityManagerUtil;
+import com.gabrielferreira.repositorio.generico.RepositorioGenerico;
 
-public class TipoRepositorio implements Serializable{
+public class TipoRepositorio extends RepositorioGenerico<Tipo>{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private EntityManager entityManager = EntityManagerUtil.getEntityManager();
-	
 	@SuppressWarnings("unchecked")
 	public List<Tipo> getTipos(String tipoCarro){
-		Query query = entityManager.createNamedQuery("Tipos.findAll");
+		Query query = getEntityManager().createNamedQuery("Tipos.findAll");
 		query.setParameter("tipoCarro", "%"+tipoCarro+"%");
 		
 		List<Object[]> objs = query.getResultList();
@@ -46,7 +40,7 @@ public class TipoRepositorio implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	public List<Veiculo> getVeiculos(Integer idTipo){
-		Query query = entityManager.createNamedQuery("Tipos.findById");
+		Query query = getEntityManager().createNamedQuery("Tipos.findById");
 		query.setParameter("idTipo", idTipo);
 		
 		List<Object[]> objs = query.getResultList();

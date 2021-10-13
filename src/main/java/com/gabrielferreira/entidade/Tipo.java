@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +26,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "veiculos")
 public class Tipo implements Serializable{
 
 	/**
@@ -40,7 +41,7 @@ public class Tipo implements Serializable{
 	@Column(name="tipo_carro")
 	private String tipoCarro;
 	
-	@OneToMany(mappedBy="tipo",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="tipo",fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
 
 }

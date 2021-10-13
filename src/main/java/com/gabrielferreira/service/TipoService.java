@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gabrielferreira.entidade.Tipo;
 import com.gabrielferreira.entidade.Veiculo;
+import com.gabrielferreira.exception.RegraDeNegocioException;
 import com.gabrielferreira.repositorio.TipoRepositorio;
 import com.gabrielferreira.util.FacesMessages;
 
@@ -36,6 +37,46 @@ public class TipoService implements Serializable{
 	
 	@Inject
 	private TipoRepositorio tipoRepositorio;
+	
+	public void inserir(Tipo tipo) throws RegraDeNegocioException {
+		verificarNome(tipo.getTipoCarro(), getTipos());
+		tipoRepositorio.inserir(tipo);
+	}
+	
+	public Tipo atualizar(Tipo tipo) throws RegraDeNegocioException {
+		verificarNomeSalvoAtualizar(getTipos(), tipo);
+		return tipoRepositorio.atualizar(tipo);
+	}
+	
+	public Tipo pesquisarPorId(Integer id) {
+		return tipoRepositorio.pesquisarPorId(id, Tipo.class);
+	}
+	
+	public void remover(Tipo tipo) {
+		tipoRepositorio.deletarPorId(Tipo.class, tipo.getId());
+	}
+	
+	public List<Tipo> getTipos(){
+		return tipoRepositorio.listagem(Tipo.class);
+	}
+	
+	private void verificarNome(String nome, List<Tipo> tipos) throws RegraDeNegocioException {
+		for(Tipo tipo : tipos) {
+			if(tipo.getTipoCarro().equals(nome)) {
+				throw new RegraDeNegocioException("Este nome já foi inserido, por favor tente outro nome !");
+			}
+		}
+	}
+	
+	private void verificarNomeSalvoAtualizar(List<Tipo> tipos, Tipo tipo) throws RegraDeNegocioException {
+		for(Tipo t : tipos) {
+			if(!t.getId().equals(tipo.getId())) {
+				if(t.getTipoCarro().equals(tipo.getTipoCarro())) {
+					throw new RegraDeNegocioException("Não é possível atualizar, pois já existe este nome cadastrado !");
+				}
+			}
+		}
+	}
 	
 	public List<Tipo> getTipos(String tipoCarro){
 		List<Tipo> tipos = tipoRepositorio.getTipos(tipoCarro);

@@ -1,31 +1,27 @@
 package com.gabrielferreira.repositorio;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.gabrielferreira.entidade.Marca;
 import com.gabrielferreira.entidade.Tipo;
 import com.gabrielferreira.entidade.Veiculo;
-import com.gabrielferreira.util.EntityManagerUtil;
+import com.gabrielferreira.repositorio.generico.RepositorioGenerico;
 
-public class VeiculoRepositorio implements Serializable{
+public class VeiculoRepositorio extends RepositorioGenerico<Veiculo>{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private EntityManager entityManager = EntityManagerUtil.getEntityManager();
-	
 	@SuppressWarnings("unchecked")
 	public List<Veiculo> getVeiculos(String modelo, String cor, String tipoCarro, String marca){
-		Query query = entityManager.createNamedQuery("Veiculos.findAll");
+		Query query = getEntityManager().createNamedQuery("Veiculos.findAll");
 		query.setParameter("modelo", "%"+modelo+"%");
 		query.setParameter("cor", "%"+cor+"%");
 		query.setParameter("tipo", "%"+tipoCarro+"%");

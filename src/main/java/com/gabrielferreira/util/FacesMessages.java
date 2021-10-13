@@ -6,7 +6,6 @@ import javax.faces.context.FacesContext;
 
 public class FacesMessages {
 
-	
 	public static void adicionarMensagem(String clientId, Severity severity,String sumario, String detalhe) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		FacesMessage facesMessage = new FacesMessage(severity, sumario, detalhe);
