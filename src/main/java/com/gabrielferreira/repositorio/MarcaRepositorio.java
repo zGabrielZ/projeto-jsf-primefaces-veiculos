@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import com.gabrielferreira.entidade.Marca;
 import com.gabrielferreira.entidade.Pais;
@@ -15,6 +16,14 @@ public class MarcaRepositorio extends RepositorioGenerico<Marca>{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public List<Marca> getMarcasByPais(Integer idPais){
+		String jpql = "SELECT m FROM Marca m join m.pais p where p.id = :idPais";
+		TypedQuery<Marca> query = getEntityManager().createQuery(jpql, Marca.class);
+		query.setParameter("idPais", idPais);
+		List<Marca> marcas = query.getResultList();
+		return marcas;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Marca> getMarcas(String nome, String sede, String pais){

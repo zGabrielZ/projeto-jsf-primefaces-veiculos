@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/layout/gerar-relatorio/Relatorio.xhtml" >
+
+	<ui:define name="titulo">
+		<h1>Consulta de marcas</h1>
+	</ui:define>
+
+	<ui:define name="consulta">
+		<h:form id="frmConsulta" >
+		
+			<p:messages id="msg" />
+			
+			<p:dataTable id="dataTableMarcas" value="#{paisController.marcas}"
+						var="marca" rows="5" paginator="true" paginatorPosition="bottom"
+						emptyMessage="Sua consulta não retornou registros."
+						style="margin-top:20px;" paginatorAlwaysVisible="false">
+				
+				<f:facet name="header">
+					<h:outputLabel value="Lista de marcas cadastrados"></h:outputLabel>
+				</f:facet>
+
+				<p:column style="width:50px;">
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{marca.id}" />
+				</p:column>
+
+				<p:column style="width:250px;">
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{marca.nome}" />
+				</p:column>
+				
+				<p:column style="width:250px;">
+					<f:facet name="header">Data da Fundação</f:facet>
+					<h:outputText value="#{marca.dataFundacao}" converter="dataFundacaoConverter" />
+				</p:column>
+				
+				<p:column style="width:250px;">
+					<f:facet name="header">Sede</f:facet>
+					<h:outputText value="#{marca.sede}" />
+				</p:column>
+	
+			</p:dataTable>	
+			
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

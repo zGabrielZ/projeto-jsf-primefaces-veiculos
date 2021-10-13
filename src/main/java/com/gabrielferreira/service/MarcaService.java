@@ -32,6 +32,10 @@ public class MarcaService implements Serializable{
 	@Inject
 	private MarcaRepositorio marcaRepositorio;
 	
+	public List<Marca> getMarcasByPais(Integer idPais){
+		return marcaRepositorio.getMarcasByPais(idPais);
+	}
+	
 	public List<Marca> getMarcas(String nome, String sede, String pais){
 		List<Marca> marcas = marcaRepositorio.getMarcas(nome, sede, pais);
 		return marcas;
