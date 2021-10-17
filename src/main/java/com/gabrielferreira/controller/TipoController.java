@@ -43,6 +43,8 @@ public class TipoController implements Serializable{
 	
 	private List<Tipo> tipos;
 	
+	private List<Veiculo> veiculos;
+	
 	private Tipo tipoSelecionado;
 	
 	private String mensagem;
@@ -56,10 +58,16 @@ public class TipoController implements Serializable{
 	
 	private void verificarParametro() {
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		String id = params.get("codigoTipoCarro");
-		if(id != null) {
-			tipo = tipoService.pesquisarPorId(Integer.parseInt(id));
+		String idTipoCarro = params.get("codigoTipoCarro");
+		String idTipoCarroVeiculos = params.get("codigoTipoCarroVeiculos");
+		if(idTipoCarro != null) {
+			tipo = tipoService.pesquisarPorId(Integer.parseInt(idTipoCarro));
 		}
+
+		if(idTipoCarroVeiculos != null) {
+			veiculos = veiculoService.findVeiculosByTipoCarro(Integer.parseInt(idTipoCarroVeiculos));
+		}
+
 	}
 	
 	public void inserirOuAtualizar() {

@@ -28,7 +28,7 @@ public class VeiculoRepositorio extends RepositorioGenerico<Veiculo>{
 	}
 	
 	public List<Veiculo> findVeiculosByTipo(Integer idCarro){
-		String jpql = "SELECT v FROM Veiculo v join v.tipo t where t.id = :idCarro";
+		String jpql = "SELECT v FROM Veiculo v join v.tipo t left join v.marca m where t.id = :idCarro";
 		TypedQuery<Veiculo> query = getEntityManager().createQuery(jpql, Veiculo.class);
 		query.setParameter("idCarro", idCarro);
 		List<Veiculo> veiculos = query.getResultList();

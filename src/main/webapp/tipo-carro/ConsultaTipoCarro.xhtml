@@ -37,7 +37,15 @@
 					<h:outputText value="#{tipo.tipoCarro}" />
 				</p:column>
 				
-				<p:column style="width:200px;" >
+				<p:column style="width:100px;">
+					<f:facet name="header">Veículos</f:facet>
+					<p:commandButton title="Visualizar Veículos" icon="fa fa-check"
+						update="@form" ajax="false" action="Veiculos" >
+						<f:param name="codigoTipoCarroVeiculos" value="#{tipo.id}" />
+					</p:commandButton>
+				</p:column>
+				
+				<p:column style="width:90px;" >
 					<f:facet name="header">Editar</f:facet>
 					<p:commandLink title="Atualizar o tipo de carro"
 						update="@form" ajax="false" action="CadastroTipoCarro" >
@@ -47,7 +55,7 @@
 					</p:commandLink>
 				</p:column>
 				
-				<p:column style="width:200px;" >
+				<p:column style="width:90px;" >
 					<f:facet name="header">Deletar</f:facet>
 					<p:commandLink 
 						title="Deletar o tipo de carro" action="#{tipoController.pegarRegistro(tipo)}" 
