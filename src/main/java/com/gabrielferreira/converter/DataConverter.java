@@ -11,8 +11,8 @@ import javax.faces.convert.FacesConverter;
 
 import com.gabrielferreira.util.FacesMessages;
 
-@FacesConverter("dataFundacaoConverter")
-public class DataFundacaoConverter implements Converter{
+@FacesConverter("dataConverter")
+public class DataConverter implements Converter{
 	
 	private SimpleDateFormat stf = new SimpleDateFormat("dd/MM/yyyy");
 
