@@ -30,6 +30,26 @@ public class NavegacaoController implements Serializable{
 	    }
 	}
 	
+	public void cadastroMarca() {
+	    ExternalContext externalContext = getExternalContext();
+	    try {
+	          externalContext.redirect(externalContext.getRequestContextPath()
+	                + "/marca/CadastroMarca.xhtml");
+	    } catch (IOException e) {
+	          e.printStackTrace();
+	    }
+	}
+	
+	public void consultaMarca() {
+	    ExternalContext externalContext = getExternalContext();
+	    try {
+	          externalContext.redirect(externalContext.getRequestContextPath()
+	                + "/marca/ConsultaMarca.xhtml");
+	    } catch (IOException e) {
+	          e.printStackTrace();
+	    }
+	}
+	
 	public void cadastroPais() {
 	    ExternalContext externalContext = getExternalContext();
 	    try {

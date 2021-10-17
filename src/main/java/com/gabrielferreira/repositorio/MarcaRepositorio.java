@@ -17,6 +17,13 @@ public class MarcaRepositorio extends RepositorioGenerico<Marca>{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	public List<Marca> getMarcasPais(){
+		String jpql = "SELECT m FROM Marca m join m.pais p order by m.id desc";
+		TypedQuery<Marca> query = getEntityManager().createQuery(jpql, Marca.class);
+		List<Marca> marcas = query.getResultList();
+		return marcas;
+	}
+	
 	public List<Marca> getMarcasByPais(Integer idPais){
 		String jpql = "SELECT m FROM Marca m join m.pais p where p.id = :idPais";
 		TypedQuery<Marca> query = getEntityManager().createQuery(jpql, Marca.class);

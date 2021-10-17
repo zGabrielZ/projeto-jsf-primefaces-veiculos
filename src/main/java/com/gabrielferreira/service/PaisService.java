@@ -1,7 +1,10 @@
 package com.gabrielferreira.service;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import com.gabrielferreira.entidade.Pais;
@@ -40,6 +43,14 @@ public class PaisService implements Serializable{
 	
 	public List<Pais> getPaises(){
 		return paisRepositorio.listagem(Pais.class);
+	}
+	
+	public List<SelectItem> getPaisesMarcas(){
+		List<SelectItem> selectItems = new ArrayList<SelectItem>();
+		for(Pais pais : getPaises()) {
+			selectItems.add(new SelectItem(pais, pais.getNome()));
+		}
+		return selectItems;
 	}
 	
 	private void verificarNome(String nome, List<Pais> paises) throws RegraDeNegocioException {

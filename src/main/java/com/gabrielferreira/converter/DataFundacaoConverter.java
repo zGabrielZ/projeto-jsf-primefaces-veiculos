@@ -3,10 +3,13 @@ package com.gabrielferreira.converter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+
+import com.gabrielferreira.util.FacesMessages;
 
 @FacesConverter("dataFundacaoConverter")
 public class DataFundacaoConverter implements Converter{
@@ -15,8 +18,17 @@ public class DataFundacaoConverter implements Converter{
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		// TODO Auto-generated method stub
-		return null;
+		Date data = null;
+		if(value != null && !value.equals("")) {
+			// DD/MM/YYYY
+			try {
+				data = stf.parse(value);
+			} catch (Exception e) {
+				FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_ERROR,"Formato incorreto : DD/MM/YYYY",null);
+			}
+		}
+		
+		return data;
 	}
 
 	@Override

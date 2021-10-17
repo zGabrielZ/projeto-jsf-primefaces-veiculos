@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:composition template="/layout/gerar-relatorio/Relatorio.xhtml" >
+
+	<ui:define name="titulo">
+		<h1>Cadastro de marcas</h1>
+		<p>Formato da data fundação : (DD/MM/YYYY')</p>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmCadastro">
+			<p:messages id="msg" autoUpdate="true" />
+			
+			<p:inputText id="codigo" type="hidden" label="Código" value="#{marcaController.marca.id}" />
+			
+			<div align="center" >
+				<h:panelGrid columns="2" >
+				
+					<p:outputLabel for="nome" value="Nome :" />
+					<p:inputText value="#{marcaController.marca.nome}"
+						 label="Nome" id="nome" maxlength="155" required="true" 
+						 requiredMessage="Nome é obrigatório">
+					</p:inputText>
+					
+					<p:outputLabel for="dataFundacao" value="Data Fundação :" />
+					<p:inputMask value="#{marcaController.marca.dataFundacao}"
+						 label="Data Fundação" id="dataFundacao" required="true" 
+						 requiredMessage="Data Fundação é obrigatório" converter="dataFundacaoConverter" 
+						 mask="99/99/9999">
+					</p:inputMask>
+					
+					<p:outputLabel for="sede" value="Sede :" />
+					<p:inputText value="#{marcaController.marca.sede}"
+						 label="Sede" id="sede" maxlength="155" required="true" 
+						 requiredMessage="Sede é obrigatório">
+					</p:inputText>
+
+					<p:outputLabel value="País :" for="pais" />
+					<p:selectOneMenu id="pais"
+						value="#{marcaController.marca.pais}" required="true"
+						converter="#{paisConverter}"
+						requiredMessage="País é obrigatório">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{marcaController.paises}" />
+					</p:selectOneMenu>
+
+					<p:commandLink title="Novo"
+						ajax="false" update="@form" action="#{marcaController.novo}" >
+						<o:skipValidators />
+						<h:graphicImage width="50" value="/resources/imagem/img-novo.png"></h:graphicImage>
+					</p:commandLink>
+					<p:commandLink title="Cadastrar Marca"
+						ajax="false" update="@form" action="#{marcaController.inserirOuAtualizar}" >
+						<h:graphicImage width="50"
+								value="/resources/imagem/img-cadastro.png"></h:graphicImage>
+					</p:commandLink>
+				
+				</h:panelGrid>
+			</div>
+			
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

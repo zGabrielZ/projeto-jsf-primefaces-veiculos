@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gabrielferreira.entidade.Marca;
+import com.gabrielferreira.exception.RegraDeNegocioException;
 import com.gabrielferreira.repositorio.MarcaRepositorio;
 import com.gabrielferreira.util.FacesMessages;
 
@@ -31,6 +32,32 @@ public class MarcaService implements Serializable{
 	
 	@Inject
 	private MarcaRepositorio marcaRepositorio;
+	
+	public void inserir(Marca marca) throws RegraDeNegocioException {
+		verificarNome(marca.getNome(), getMarcasListagem());
+		marcaRepositorio.inserir(marca);
+	}
+	
+	public Marca atualizar(Marca marca) throws RegraDeNegocioException {
+		verificarNomeSalvoAtualizar(getMarcasListagem(), marca);
+		return marcaRepositorio.atualizar(marca);
+	}
+	
+	public Marca pesquisarPorId(Integer id) {
+		return marcaRepositorio.pesquisarPorId(id, Marca.class);
+	}
+	
+	public void remover(Marca marca) {
+		marcaRepositorio.deletarPorId(Marca.class, marca.getId());
+	}
+	
+	public List<Marca> getMarcasListagem(){
+		return marcaRepositorio.listagem(Marca.class);
+	}
+	
+	public List<Marca> getMarcasPais(){
+		return marcaRepositorio.getMarcasPais();
+	}
 	
 	public List<Marca> getMarcasByPais(Integer idPais){
 		return marcaRepositorio.getMarcasByPais(idPais);
@@ -79,5 +106,23 @@ public class MarcaService implements Serializable{
 			e.printStackTrace();
 		}
 	} 
+	
+	private void verificarNome(String nome, List<Marca> marcas) throws RegraDeNegocioException {
+		for(Marca marca : marcas) {
+			if(marca.getNome().equals(nome)) {
+				throw new RegraDeNegocioException("Este nome já foi inserido, por favor tente outro nome !");
+			}
+		}
+	}
+	
+	private void verificarNomeSalvoAtualizar(List<Marca> marcas, Marca marca) throws RegraDeNegocioException {
+		for(Marca m : marcas) {
+			if(!m.getId().equals(marca.getId())) {
+				if(m.getNome().equals(marca.getNome())) {
+					throw new RegraDeNegocioException("Não é possível atualizar, pois já existe este nome cadastrado !");
+				}
+			}
+		}
+	}
 
 }
