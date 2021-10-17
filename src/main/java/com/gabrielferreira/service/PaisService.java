@@ -37,10 +37,6 @@ public class PaisService implements Serializable{
 		return paisRepositorio.pesquisarPorId(id, Pais.class);
 	}
 	
-	public void remover(Pais pais) {
-		paisRepositorio.deletarPorId(Pais.class, pais.getId());
-	}
-	
 	public List<Pais> getPaises(){
 		return paisRepositorio.listagem(Pais.class);
 	}

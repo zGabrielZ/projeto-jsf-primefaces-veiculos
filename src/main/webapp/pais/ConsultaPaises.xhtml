@@ -42,7 +42,7 @@
 					<h:outputText value="#{pais.nome}" />
 				</p:column>
 				
-				<p:column style="width:200px;">
+				<p:column style="width:100px;">
 					<f:facet name="header">Marcas</f:facet>
 					<p:commandButton title="Visualizar Marcas" icon="fa fa-check"
 						update="@form" ajax="false" action="Marcas" >
@@ -50,7 +50,7 @@
 					</p:commandButton>
 				</p:column>
 				
-				<p:column style="width:200px;" >
+				<p:column style="width:100px;" >
 					<f:facet name="header">Editar</f:facet>
 					<p:commandLink title="Atualizar país"
 						update="@form" ajax="false" action="CadastroPaises" >
@@ -59,32 +59,7 @@
 						<f:param name="codigoPaises" value="#{pais.id}" />
 					</p:commandLink>
 				</p:column>
-				
-				<p:column style="width:200px;" >
-					<f:facet name="header">Deletar</f:facet>
-					<p:commandLink 
-						title="Deletar país" action="#{paisController.pegarRegistro(pais)}" >
-						<h:graphicImage width="50"
-									value="/resources/imagem/imagem-deletar.png"></h:graphicImage>
-					</p:commandLink> 
-				</p:column>
-
 			</p:dataTable>	
-			
-			<p:confirmDialog header="Exclusão de países"
-				message="Tem certeza que deseja excluir este país ?"
-				widgetVar="meuDialogo" resizable="false" modal="true"
-				minimizable="true" maximizable="true">
-
-				<p:commandButton value="Sim"
-					action="#{paisController.remover}"
-					update="dataTablePaises" ajax="false" process="@form"
-					onclick="meuDialogo.hide()" />
-				
-				<p:commandButton value="Nao" update="dataTablePaises"
-					ajax="false" process="@form" onclick="meuDialogo.hide()" />
-
-			</p:confirmDialog>
 			
 		</h:form>
 	</ui:define>

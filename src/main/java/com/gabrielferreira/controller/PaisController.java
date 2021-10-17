@@ -11,7 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.context.RequestContext;
 
 import com.gabrielferreira.entidade.Marca;
 import com.gabrielferreira.entidade.Pais;
@@ -87,7 +86,7 @@ public class PaisController implements Serializable{
 		try {
 			paisService.inserir(pais);
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_INFO,"Cadastrado com sucesso !!",null);
-			pais = new Pais();
+			novo();
 		} catch (RegraDeNegocioException e) {
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_ERROR,e.getMessage(),null);
 		}
@@ -97,22 +96,9 @@ public class PaisController implements Serializable{
 		try {
 			paisService.atualizar(pais);
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_INFO,"Atualizado com sucesso !!",null);
-			pais = new Pais();
+			novo();
 		} catch (RegraDeNegocioException e) {
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_ERROR,e.getMessage(),null);
 		}
 	}
-	
-	public void remover() {
-		paisService.remover(paisSelecionado);
-		FacesMessages.adicionarMensagem("frmConsulta:msg",FacesMessage.SEVERITY_INFO,"Deletado com sucesso !!",null);
-		iniciar();
-	}
-	
-	public void pegarRegistro(Pais pais) {
-		paisSelecionado = pais;
-		RequestContext context = RequestContext.getCurrentInstance();
-		context.execute("PF('meuDialogo').show();");
-	}
-
 }
