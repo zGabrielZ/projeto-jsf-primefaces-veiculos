@@ -25,7 +25,7 @@ public class PaisConverter implements Converter{
 		
 		if(value != null) {
 			if(value.contains("Selecione")) {
-				FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_ERROR,"Selecione um estado",null);
+				FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_ERROR,"Selecione um país",null);
 			} else {
 				pais = paisService.pesquisarPorId(new Integer(value));
 			}

@@ -52,7 +52,7 @@
 					<h:outputText value="#{marca.pais.nome}" />
 				</p:column>
 				
-				<p:column style="width:200px;" >
+				<p:column style="width:100px;" >
 					<f:facet name="header">Editar</f:facet>
 					<p:commandLink title="Atualizar marca"
 						update="@form" ajax="false" action="CadastroMarca" >
@@ -62,9 +62,9 @@
 					</p:commandLink>
 				</p:column>
 				
-				<p:column style="width:200px;" >
+				<p:column style="width:100px;" >
 					<f:facet name="header">Deletar</f:facet>
-					<p:commandLink 
+					<p:commandLink update="@form"
 						title="Deletar país" action="#{marcaController.pegarRegistro(marca)}" >
 						<h:graphicImage width="50"
 									value="/resources/imagem/imagem-deletar.png"></h:graphicImage>
@@ -74,7 +74,7 @@
 			</p:dataTable>	
 			
 			<p:confirmDialog header="Exclusão de marcas"
-				message="Tem certeza que deseja excluir esta marca ?, pode ter veículos associados a esta marca."
+				message="#{marcaController.mensagem}"
 				widgetVar="meuDialogo" resizable="false" modal="true"
 				minimizable="true" maximizable="true">
 

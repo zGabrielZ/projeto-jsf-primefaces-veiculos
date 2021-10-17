@@ -35,6 +35,14 @@ public class VeiculoRepositorio extends RepositorioGenerico<Veiculo>{
 		return veiculos;
 	}
 	
+	public List<Veiculo> findVeiculosByMarca(Integer idMarca){
+		String jpql = "SELECT v FROM Veiculo v join v.marca m where m.id = :idMarca";
+		TypedQuery<Veiculo> query = getEntityManager().createQuery(jpql, Veiculo.class);
+		query.setParameter("idMarca", idMarca);
+		List<Veiculo> veiculos = query.getResultList();
+		return veiculos;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Veiculo> getVeiculos(String modelo, String cor, String tipoCarro, String marca){
 		Query query = getEntityManager().createNamedQuery("Veiculos.findAll");

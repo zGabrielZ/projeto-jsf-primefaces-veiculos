@@ -15,9 +15,11 @@ import org.primefaces.context.RequestContext;
 
 import com.gabrielferreira.entidade.Marca;
 import com.gabrielferreira.entidade.Pais;
+import com.gabrielferreira.entidade.Veiculo;
 import com.gabrielferreira.exception.RegraDeNegocioException;
 import com.gabrielferreira.service.MarcaService;
 import com.gabrielferreira.service.PaisService;
+import com.gabrielferreira.service.VeiculoService;
 import com.gabrielferreira.util.FacesMessages;
 
 import lombok.Getter;
@@ -40,13 +42,20 @@ public class MarcaController implements Serializable{
 	@Inject
 	private PaisService paisService;
 	
+	@Inject
+	private VeiculoService veiculoService;
+	
 	private Marca marca;
 	
 	private Pais pais;
 	
 	private List<Marca> marcas;
 	
+	private List<Veiculo> veiculos;
+	
 	private Marca marcaSelecionado;
+	
+	private String mensagem;
 	
 	@PostConstruct
 	public void iniciar() {
@@ -91,7 +100,7 @@ public class MarcaController implements Serializable{
 		try {
 			marcaService.inserir(marca);
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_INFO,"Cadastrado com sucesso !!",null);
-			marca = new Marca();
+			novo();
 		} catch (RegraDeNegocioException e) {
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_ERROR,e.getMessage(),null);
 		}
@@ -101,7 +110,7 @@ public class MarcaController implements Serializable{
 		try {
 			marcaService.atualizar(marca);
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_INFO,"Atualizado com sucesso !!",null);
-			marca = new Marca();
+			novo();
 		} catch (RegraDeNegocioException e) {
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_ERROR,e.getMessage(),null);
 		}
@@ -115,6 +124,12 @@ public class MarcaController implements Serializable{
 	
 	public void pegarRegistro(Marca marca) {
 		marcaSelecionado = marca;
+		List<Veiculo> veiculos = veiculoService.findVeiculosByMarca(marcaSelecionado.getId());
+		if(veiculos.isEmpty()) {
+			mensagem = "Tem certeza que deseja excluir esta marca ?";
+		} else {
+			mensagem = "Tem certeza que deseja excluir esta marca ?, tem veículos associados.";
+		}
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.execute("PF('meuDialogo').show();");
 	}
