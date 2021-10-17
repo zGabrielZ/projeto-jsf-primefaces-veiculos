@@ -13,6 +13,7 @@ import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 
 import com.gabrielferreira.entidade.Tipo;
+import com.gabrielferreira.entidade.Veiculo;
 import com.gabrielferreira.exception.RegraDeNegocioException;
 import com.gabrielferreira.service.TipoService;
 import com.gabrielferreira.service.VeiculoService;
@@ -43,6 +44,8 @@ public class TipoController implements Serializable{
 	private List<Tipo> tipos;
 	
 	private Tipo tipoSelecionado;
+	
+	private String mensagem;
 	
 	@PostConstruct
 	public void iniciar() {
@@ -75,7 +78,7 @@ public class TipoController implements Serializable{
 		try {
 			tipoService.inserir(tipo);
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_INFO,"Cadastrado com sucesso !!",null);
-			tipo = new Tipo();
+			novo();
 		} catch (RegraDeNegocioException e) {
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_ERROR,e.getMessage(),null);
 		}
@@ -85,7 +88,7 @@ public class TipoController implements Serializable{
 		try {
 			tipoService.atualizar(tipo);
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_INFO,"Atualizado com sucesso !!",null);
-			tipo = new Tipo();
+			novo();
 		} catch (RegraDeNegocioException e) {
 			FacesMessages.adicionarMensagem("frmCadastro:msg",FacesMessage.SEVERITY_ERROR,e.getMessage(),null);
 		}
@@ -99,6 +102,12 @@ public class TipoController implements Serializable{
 	
 	public void pegarRegistro(Tipo tipo) {
 		tipoSelecionado = tipo;
+		List<Veiculo> veiculos = veiculoService.findVeiculosByTipoCarro(tipoSelecionado.getId());
+		if(veiculos.isEmpty()) {
+			mensagem = "Tem certeza que deseja excluir este tipo de carro ?";
+		} else {
+			mensagem = "Tem certeza que deseja excluir este tipo de carro ?, tem veículos associados.";
+		}
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.execute("PF('meuDialogo').show();");
 	}

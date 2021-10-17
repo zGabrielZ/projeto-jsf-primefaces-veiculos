@@ -50,7 +50,8 @@
 				<p:column style="width:200px;" >
 					<f:facet name="header">Deletar</f:facet>
 					<p:commandLink 
-						title="Deletar o tipo de carro" action="#{tipoController.pegarRegistro(tipo)}" >
+						title="Deletar o tipo de carro" action="#{tipoController.pegarRegistro(tipo)}" 
+						update="@form">
 						<h:graphicImage width="50"
 									value="/resources/imagem/imagem-deletar.png"></h:graphicImage>
 					</p:commandLink> 
@@ -59,9 +60,10 @@
 			</p:dataTable>	
 			
 			<p:confirmDialog header="Exclusão do tipo de carro"
-				message="Tem certeza que deseja excluir este tipo de carro ?"
+				message="#{tipoController.mensagem}"
 				widgetVar="meuDialogo" resizable="false" modal="true"
-				minimizable="true" maximizable="true">
+				minimizable="true" maximizable="true" 
+				>
 
 				<p:commandButton value="Sim"
 					action="#{tipoController.remover}"

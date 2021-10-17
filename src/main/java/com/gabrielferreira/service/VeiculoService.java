@@ -63,6 +63,10 @@ public class VeiculoService implements Serializable{
 		return veiculos;
 	}
 	
+	public List<Veiculo> findVeiculosByTipoCarro(Integer idTipoCarro){
+		return veiculoRepositorio.findVeiculosByTipo(idTipoCarro);
+	}
+	
 	public List<Veiculo> getVeiculos(String modelo, String cor, String tipoCarro, String marca){
 		List<Veiculo> veiculos = veiculoRepositorio.getVeiculos(modelo, cor, tipoCarro, marca);
 		return veiculos;
