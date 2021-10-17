@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:composition template="/layout/gerar-relatorio/Relatorio.xhtml" >
+
+	<ui:define name="titulo">
+		<h1>Cadastro de veículos</h1>
+		<p>Formato da data de lançameto : (DD/MM/YYYY)</p>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmCadastro">
+			<p:messages id="msg" autoUpdate="true" />
+			
+			<p:inputText id="codigo" type="hidden" label="Código" value="#{veiculoController.veiculo.id}"  />
+			
+			<div align="center" >
+				<h:panelGrid columns="2" >
+				
+					<p:outputLabel for="modelo" value="Modelo :" />
+					<p:inputText value="#{veiculoController.veiculo.modelo}"
+						 label="Modelo" id="modelo" maxlength="155" required="true" 
+						 requiredMessage="Modelo é obrigatório">
+					</p:inputText>
+					
+					<p:outputLabel for="dataLancamento" value="Data Lançamento :" />
+					<p:inputMask value="#{veiculoController.veiculo.dataLancamento}"
+						 label="Data Lançamento" id="dataLancamento" required="true" 
+						 requiredMessage="Data Lançamento é obrigatório" converter="dataConverter" 
+						 mask="99/99/9999">
+					</p:inputMask>
+					
+					<p:outputLabel for="preco" value="Preço :" />
+					<p:inputNumber value="#{veiculoController.veiculo.preco}"
+						 label="Preço" id="preco" required="true" 
+						 requiredMessage="Preço é obrigatório">
+					</p:inputNumber>
+					
+					<p:outputLabel for="cor" value="Cor :" />
+					<p:selectOneRadio id="cor" required="true" requiredMessage="Cor é obrigatório]"
+						value="#{veiculoController.veiculo.cor}" layout="pageDirection" >
+						<f:selectItem itemValue="Amarelo" itemLabel="Amarelo" />
+						<f:selectItem itemValue="Vermelho" itemLabel="Vermelho" />
+						<f:selectItem itemValue="Laranja" itemLabel="Laranja" />
+						<f:selectItem itemValue="Branco" itemLabel="Branco" />
+						<f:selectItem itemValue="Preto" itemLabel="Preto" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="Tipo :" for="tipo" />
+					<p:selectOneMenu id="tipo" value="#{veiculoController.veiculo.tipo}"
+						required="true" converter="#{tipoConverter}"
+						requiredMessage="Tipo é obrigatório">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{veiculoController.tipos}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Marca :" for="marca" />
+					<p:selectOneMenu id="marca" value="#{veiculoController.veiculo.marca}"
+						required="true" converter="#{marcaConverter}"
+						requiredMessage="Marca é obrigatório">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{veiculoController.marcas}" />
+					</p:selectOneMenu>
+
+					<p:commandLink title="Novo"
+						ajax="false" update="@form" action="#{veiculoController.novo}"  >
+						<o:skipValidators />
+						<h:graphicImage width="50" value="/resources/imagem/img-novo.png"></h:graphicImage>
+					</p:commandLink>
+					<p:commandLink title="Cadastrar Marca"
+						ajax="false" update="@form" action="#{veiculoController.inserirOuAtualizar}" >
+						<h:graphicImage width="50"
+								value="/resources/imagem/img-cadastro.png"></h:graphicImage>
+					</p:commandLink>
+				
+				</h:panelGrid>
+			</div>
+			
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

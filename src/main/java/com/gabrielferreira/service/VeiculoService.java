@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gabrielferreira.entidade.Veiculo;
+import com.gabrielferreira.exception.RegraDeNegocioException;
 import com.gabrielferreira.repositorio.TipoRepositorio;
 import com.gabrielferreira.repositorio.VeiculoRepositorio;
 import com.gabrielferreira.util.FacesMessages;
@@ -34,6 +35,28 @@ public class VeiculoService implements Serializable{
 	
 	@Inject
 	private TipoRepositorio tipoRepositorio;
+	
+	public void inserir(Veiculo veiculo) throws RegraDeNegocioException {
+		verificarNome(veiculo.getModelo(), getVeiculosListagem());
+		veiculoRepositorio.inserir(veiculo);
+	}
+	
+	public Veiculo atualizar(Veiculo veiculo) throws RegraDeNegocioException {
+		verificarNomeSalvoAtualizar(getVeiculosListagem(), veiculo);
+		return veiculoRepositorio.atualizar(veiculo);
+	}
+	
+	public Veiculo pesquisarPorId(Integer id) {
+		return veiculoRepositorio.pesquisarPorId(id, Veiculo.class);
+	}
+	
+	public void remover(Veiculo veiculo) {
+		veiculoRepositorio.deletarPorId(Veiculo.class, veiculo.getId());
+	}
+	
+	public List<Veiculo> getVeiculosListagem(){
+		return veiculoRepositorio.listagem();
+	}
 	
 	public List<Veiculo> getVeiculosByIdTipo(Integer idTipo){
 		List<Veiculo> veiculos = tipoRepositorio.getVeiculos(idTipo); 
@@ -84,5 +107,23 @@ public class VeiculoService implements Serializable{
 			e.printStackTrace();
 		}
 	} 
+	
+	private void verificarNome(String nome, List<Veiculo> veiculos) throws RegraDeNegocioException {
+		for(Veiculo veiculo : veiculos) {
+			if(veiculo.getModelo().equals(nome)) {
+				throw new RegraDeNegocioException("Este nome já foi inserido, por favor tente outro nome !");
+			}
+		}
+	}
+	
+	private void verificarNomeSalvoAtualizar(List<Veiculo> veiculos, Veiculo veiculo) throws RegraDeNegocioException {
+		for(Veiculo v : veiculos) {
+			if(!v.getId().equals(veiculo.getId())) {
+				if(v.getModelo().equals(veiculo.getModelo())) {
+					throw new RegraDeNegocioException("Não é possível atualizar, pois já existe este nome cadastrado !");
+				}
+			}
+		}
+	}
 
 }

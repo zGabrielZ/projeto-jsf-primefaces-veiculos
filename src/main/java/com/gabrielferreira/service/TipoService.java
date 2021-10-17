@@ -8,8 +8,10 @@ import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
+
 
 import com.gabrielferreira.entidade.Tipo;
 import com.gabrielferreira.entidade.Veiculo;
@@ -58,6 +60,15 @@ public class TipoService implements Serializable{
 	
 	public List<Tipo> getTipos(){
 		return tipoRepositorio.listagem(Tipo.class);
+	}
+	
+	public List<SelectItem> getTiposListagemSelectItem(){
+		List<Tipo> tipos = getTipos();
+		List<SelectItem> selectItems = new ArrayList<SelectItem>();
+		for(Tipo tipo : tipos) {
+			selectItems.add(new SelectItem(tipo, tipo.getTipoCarro()));
+		}
+		return selectItems;
 	}
 	
 	private void verificarNome(String nome, List<Tipo> tipos) throws RegraDeNegocioException {

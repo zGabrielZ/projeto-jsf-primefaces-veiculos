@@ -1,12 +1,14 @@
 package com.gabrielferreira.service;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
@@ -61,6 +63,15 @@ public class MarcaService implements Serializable{
 	
 	public List<Marca> getMarcasByPais(Integer idPais){
 		return marcaRepositorio.getMarcasByPais(idPais);
+	}
+	
+	public List<SelectItem> getMarcasListagemSelectItem(){
+		List<Marca> marcas = getMarcasListagem();
+		List<SelectItem> selectItems = new ArrayList<SelectItem>();
+		for(Marca marca : marcas) {
+			selectItems.add(new SelectItem(marca, marca.getNome()));
+		}
+		return selectItems;
 	}
 	
 	public List<Marca> getMarcas(String nome, String sede, String pais){
