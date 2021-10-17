@@ -34,7 +34,7 @@
 					<p:inputMask value="#{marcaController.marca.dataFundacao}"
 						 label="Data Fundação" id="dataFundacao" required="true" 
 						 requiredMessage="Data Fundação é obrigatório" converter="dataConverter" 
-						 mask="99/99/9999">
+						 mask="99/99/9999" validator="#{dataValidator.validate}" >
 					</p:inputMask>
 					
 					<p:outputLabel for="sede" value="Sede :" />
