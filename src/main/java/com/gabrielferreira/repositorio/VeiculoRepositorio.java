@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -20,16 +22,19 @@ public class VeiculoRepositorio extends RepositorioGenerico<Veiculo>{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Inject
+	private EntityManager entityManager;
+	
 	public List<Veiculo> listagem(){
 		String jpql = "SELECT v FROM Veiculo v left join v.tipo t left join v.marca m order by v.id desc";
-		TypedQuery<Veiculo> query = getEntityManager().createQuery(jpql, Veiculo.class);
+		TypedQuery<Veiculo> query = entityManager.createQuery(jpql, Veiculo.class);
 		List<Veiculo> veiculos = query.getResultList();
 		return veiculos;
 	}
 	
 	public List<Veiculo> findVeiculosByTipo(Integer idCarro){
 		String jpql = "SELECT v FROM Veiculo v join v.tipo t left join v.marca m where t.id = :idCarro";
-		TypedQuery<Veiculo> query = getEntityManager().createQuery(jpql, Veiculo.class);
+		TypedQuery<Veiculo> query = entityManager.createQuery(jpql, Veiculo.class);
 		query.setParameter("idCarro", idCarro);
 		List<Veiculo> veiculos = query.getResultList();
 		return veiculos;
@@ -37,7 +42,7 @@ public class VeiculoRepositorio extends RepositorioGenerico<Veiculo>{
 	
 	public List<Veiculo> findVeiculosByMarca(Integer idMarca){
 		String jpql = "SELECT v FROM Veiculo v join v.marca m where m.id = :idMarca";
-		TypedQuery<Veiculo> query = getEntityManager().createQuery(jpql, Veiculo.class);
+		TypedQuery<Veiculo> query = entityManager.createQuery(jpql, Veiculo.class);
 		query.setParameter("idMarca", idMarca);
 		List<Veiculo> veiculos = query.getResultList();
 		return veiculos;
@@ -45,7 +50,7 @@ public class VeiculoRepositorio extends RepositorioGenerico<Veiculo>{
 	
 	@SuppressWarnings("unchecked")
 	public List<Veiculo> getVeiculos(String modelo, String cor, String tipoCarro, String marca){
-		Query query = getEntityManager().createNamedQuery("Veiculos.findAll");
+		Query query = entityManager.createNamedQuery("Veiculos.findAll");
 		query.setParameter("modelo", "%"+modelo+"%");
 		query.setParameter("cor", "%"+cor+"%");
 		query.setParameter("tipo", "%"+tipoCarro+"%");

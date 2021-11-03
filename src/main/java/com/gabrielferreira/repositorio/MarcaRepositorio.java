@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -17,16 +19,19 @@ public class MarcaRepositorio extends RepositorioGenerico<Marca>{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Inject
+	private EntityManager entityManager;
+	
 	public List<Marca> getMarcasPais(){
 		String jpql = "SELECT m FROM Marca m join m.pais p order by m.id desc";
-		TypedQuery<Marca> query = getEntityManager().createQuery(jpql, Marca.class);
+		TypedQuery<Marca> query = entityManager.createQuery(jpql, Marca.class);
 		List<Marca> marcas = query.getResultList();
 		return marcas;
 	}
 	
 	public List<Marca> getMarcasByPais(Integer idPais){
 		String jpql = "SELECT m FROM Marca m join m.pais p where p.id = :idPais";
-		TypedQuery<Marca> query = getEntityManager().createQuery(jpql, Marca.class);
+		TypedQuery<Marca> query = entityManager.createQuery(jpql, Marca.class);
 		query.setParameter("idPais", idPais);
 		List<Marca> marcas = query.getResultList();
 		return marcas;
@@ -34,7 +39,7 @@ public class MarcaRepositorio extends RepositorioGenerico<Marca>{
 	
 	@SuppressWarnings("unchecked")
 	public List<Marca> getMarcas(String nome, String sede, String pais){
-		Query query = getEntityManager().createNamedQuery("Marcas.findAll");
+		Query query = entityManager.createNamedQuery("Marcas.findAll");
 		query.setParameter("nome", "%"+nome+"%");
 		query.setParameter("sede", "%"+sede+"%");
 		query.setParameter("pais", "%"+pais+"%");
